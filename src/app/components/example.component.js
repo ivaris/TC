@@ -37,7 +37,7 @@ var ExampleComponent = (function () {
     };
     ExampleComponent = __decorate([
         core_1.Component({
-            selector: 'tc-app',
+            selector: 'tc-app-dep',
             templateUrl: 'app/views/example.view.html',
             styleUrls: ['app/styles/example.style.css']
         }), 

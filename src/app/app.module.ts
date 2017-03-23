@@ -2,7 +2,10 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 
-import { ExampleComponent }  from './components/example.component';
+//import { ExampleComponent }  from './components/example.component';
+import { HeroService }  from './providers/hero.service';
+import { CountryService }  from './providers/country.service';
+import { AddTravelComponent }  from './components/addtravel.component';
 
 @NgModule({
   imports: [
@@ -10,8 +13,15 @@ import { ExampleComponent }  from './components/example.component';
     FormsModule
   ],
   declarations: [
-    ExampleComponent
+    AddTravelComponent
   ],
-  bootstrap: [ ExampleComponent ]
+  providers: [
+    HeroService,
+    CountryService
+  ],
+  bootstrap: [
+
+   AddTravelComponent
+  ]
 })
 export class AppModule { }

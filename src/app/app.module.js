@@ -11,7 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
-var example_component_1 = require('./components/example.component');
+//import { ExampleComponent }  from './components/example.component';
+var hero_service_1 = require('./providers/hero.service');
+var country_service_1 = require('./providers/country.service');
+var addtravel_component_1 = require('./components/addtravel.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -22,9 +25,15 @@ var AppModule = (function () {
                 forms_1.FormsModule
             ],
             declarations: [
-                example_component_1.ExampleComponent
+                addtravel_component_1.AddTravelComponent
             ],
-            bootstrap: [example_component_1.ExampleComponent]
+            providers: [
+                hero_service_1.HeroService,
+                country_service_1.CountryService
+            ],
+            bootstrap: [
+                addtravel_component_1.AddTravelComponent
+            ]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
