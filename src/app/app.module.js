@@ -11,10 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
-//import { ExampleComponent }  from './components/example.component';
-var hero_service_1 = require('./providers/hero.service');
+var http_1 = require('@angular/http');
 var country_service_1 = require('./providers/country.service');
 var addtravel_component_1 = require('./components/addtravel.component');
+var routing_module_1 = require('./routing.module');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -22,13 +22,14 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
-                forms_1.FormsModule
+                forms_1.FormsModule,
+                http_1.HttpModule,
+                routing_module_1.RoutingModule
             ],
             declarations: [
                 addtravel_component_1.AddTravelComponent
             ],
             providers: [
-                hero_service_1.HeroService,
                 country_service_1.CountryService
             ],
             bootstrap: [

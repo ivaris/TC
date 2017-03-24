@@ -10,17 +10,18 @@ import { CountryService }  from '../providers/country.service';
 })
 export class AddTravelComponent implements OnInit {
 
-  title = 'Tour of Countries';
+  title = 'Travel Companion';
   countries: Country[];
-  selectedCountry: Country;
+  sourceCountry: {};
+  destinationCountry: {};
   constructor(private countryService: CountryService) { }
   getCountries(): void {
-    this.countryService.getCountries().then(countries => this.countries = countries);
+    this.countryService.getCountriesMock().then(countries => this.countries = countries);
   }
   ngOnInit(): void {
     this.getCountries();
   }
-  onSelect(country: Country): void {
-    this.selectedCountry = country;
-  }
+  /*onSelect(country: Country): void {
+    this.sourceCountry = country;
+  }*/
 }
