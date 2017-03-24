@@ -1,4 +1,4 @@
-import { Country } from 'app/domains/country';
+import { Country } from '../domains/country';
 export const COUNTRIES: Country[] = [
   {id: 11, name: 'India'},
   {id: 12, name: 'USA'},
