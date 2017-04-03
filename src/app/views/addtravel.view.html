@@ -3,15 +3,56 @@
 <div>
     <table>
         <tr>
-            <td>Source</td>
-            <td>Destination</td>
+         <td>
+             <table>
+                 <tr><td>Travel Itenary</td></tr>
+                 <tr>
+                     <td>
+                         <select [(ngModel)]="sourceCountry">
+                             <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
+                         </select>
+                     </td>
+                     <td>
+                         <select [(ngModel)]="destinationCountry">
+                             <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
+                         </select>
+                     </td>
+                     <td>
+                         Airline: <input type="text" id="airline" value="{{airline}}">
+                     </td>
+                 </tr>
+             </table>
+         </td>
+        </tr>
+
+        <TR>
+            <td>
+            <table>
+            <tr><td>Primary Traveler</td></tr>
+            <tr>
+                <td> Name: <input type="text" id="name" value="{{name}}"></td>
+                <td> Prefered Language : <input type="text" id="name" value="{{name}}"></td>
             </tr>
+            </table>
+            </td>
+        </TR>
         <tr>
-            <td><select [(ngModel)]="sourceCountry">
-    <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
-</select></td>
-<td><select [(ngModel)]="destinationCountry">
-    <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
-</select></td></tr>
+            <td>
+                <table>
+                <tr><td>Rewards</td></tr>
+                <tr><td>Offer Reward: <input type="checkbox" id="offerReward" value="{{offerReward}}"></td>
+                    <td>Retailer:
+                        <select [(ngModel)]="sourceCountry">
+                            <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}
+                            </option>
+                        </select>
+                    </td>
+                     <td>Amount:
+                        <input type="text" id="rewardAmount" value="{{rewardAmount}}">
+                    </td>
+                </tr>
+                </table>
+            </td>
+        </TR>
     </table>
 </div>

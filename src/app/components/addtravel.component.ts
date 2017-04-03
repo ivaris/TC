@@ -12,6 +12,10 @@ export class AddTravelComponent implements OnInit {
 
   title = 'Travel Companion';
   countries: Country[];
+  name : '';
+  offerReward : '';
+  giftCardProvider : '';
+  rewardAmount : '';
   sourceCountry: {};
   destinationCountry: {};
   constructor(private countryService: CountryService) { }
