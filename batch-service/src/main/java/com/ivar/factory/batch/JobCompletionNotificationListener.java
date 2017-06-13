@@ -35,6 +35,19 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 	public void afterJob(JobExecution jobExecution) {
 		if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
 			log.info("!!! JOB FINISHED! Time to verify the results");
+
+			List<String> results = jdbcTemplate.query("SELECT iata_code FROM AIRPORT", new RowMapper<String>() {
+				@Override
+				public String mapRow(ResultSet rs, int row) throws SQLException {
+
+					return rs.getString(1);
+				}
+			});
+
+			for (String aataCode : results) {
+				log.info("Found <" + aataCode + "> in the database.");
+			}
+
 		}
 	}
 }

@@ -57,6 +57,6 @@
     <orderEntry type="library" name="Maven: com.rabbitmq:amqp-client:4.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.retry:spring-retry:1.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.amqp:spring-amqp:1.7.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.hsqldb:hsqldb:2.3.3" level="project" />
+    <orderEntry type="library" name="Maven: com.oracle:ojdbc7:12.1.0.1.0" level="project" />
   </component>
 </module>

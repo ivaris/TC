@@ -1,6 +1,7 @@
 package com.ivar.factory.batch;
 
 import com.ivar.factory.batch.domains.Airport;
+import oracle.jdbc.pool.OracleDataSource;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -20,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 
 /**
  * Created by ONC50886 on 6/13/2017.
@@ -35,10 +37,24 @@ public class DemoBatchConfiguration {
 	public StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
-	public DataSource dataSource;
-
-	@Autowired
 	public AirportItemProcessor airportItemProcessor;
+
+	@Bean
+	DataSource dataSource() {
+
+		try {
+			OracleDataSource dataSource = new OracleDataSource();
+			dataSource.setUser("test_app");
+			dataSource.setPassword("test_app");
+			dataSource.setURL("jdbc:oracle:thin:@localhost:1521:XE");
+			dataSource.setImplicitCachingEnabled(true);
+			dataSource.setFastConnectionFailoverEnabled(true);
+			return dataSource;
+		}catch(SQLException e){
+
+		}
+		return null;
+	}
 
 	@Bean
 	public FlatFileItemReader<Airport> reader() {
@@ -76,8 +92,8 @@ public class DemoBatchConfiguration {
 	public JdbcBatchItemWriter<Airport> writer() {
 		JdbcBatchItemWriter<Airport> writer = new JdbcBatchItemWriter<Airport>();
 		writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Airport>());
-		writer.setSql("INSERT INTO people (first_name, last_name) VALUES (:firstName, :lastName)");
-		writer.setDataSource(dataSource);
+		writer.setSql("INSERT INTO AIRPORT (id,ident,type,name,latitude_deg ,longitude_deg ,elevation_ft ,continent,iso_country,iso_region,municipality,scheduled_service,gps_code,iata_code,local_code,home_link,wikipedia_link, key_words) VALUES (:id, :ident, :type, :name, :latitudeDeg, :longitudeDeg, :elevationFt, :continent, :isoCountry, :isoRegion, :municipality, :scheduledService, :gpsCode, :iataCode, :localCode, :homeLink, :wikipediaLink, :keywords)");
+		writer.setDataSource(dataSource());
 		return writer;
 	}
 	// end::readerwriterprocessor[]

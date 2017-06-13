@@ -15,7 +15,7 @@ public class AirportItemProcessor implements ItemProcessor<Airport,Airport> {
 	private static final Logger log = LoggerFactory.getLogger(AirportItemProcessor.class);
 
 	public Airport process(Airport airport) throws Exception {
-		log.info(">>>Processing airport:"+airport.iataCode);
+		log.info(">>>Processing airport:"+airport.getIataCode());
 		return airport;
 	}
 }
