@@ -1,6 +1,8 @@
 package com.ivar.factory.batch;
 
 import com.ivar.factory.batch.domains.Airport;
+import com.mongodb.Mongo;
+import com.mongodb.client.jndi.MongoClientFactory;
 import oracle.jdbc.pool.OracleDataSource;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -19,6 +21,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -39,83 +42,17 @@ public class DemoBatchConfiguration {
 	@Autowired
 	public AirportItemProcessor airportItemProcessor;
 
-	@Bean
-	DataSource dataSource() {
+	@Autowired
+	public MongoRepository<Airport,Airport> mongoRepository;
 
-		try {
-			OracleDataSource dataSource = new OracleDataSource();
-			dataSource.setUser("test_app");
-			dataSource.setPassword("test_app");
-			dataSource.setURL("jdbc:oracle:thin:@localhost:1521:XE");
-			dataSource.setImplicitCachingEnabled(true);
-			dataSource.setFastConnectionFailoverEnabled(true);
-			return dataSource;
-		}catch(SQLException e){
-
-		}
-		return null;
-	}
-
-	@Bean
-	public FlatFileItemReader<Airport> reader() {
-		FlatFileItemReader<Airport> reader = new FlatFileItemReader<Airport>();
-		reader.setResource(new ClassPathResource("airports.csv"));
-		reader.setLineMapper(new DefaultLineMapper<Airport>() {{
-			setLineTokenizer(new DelimitedLineTokenizer() {{
-				setNames(new String[] {"id",
-				"ident",
-				"type",
-				"name",
-				"latitudeDeg",
-				"longitudeDeg",
-				"elevationFt",
-				"continent",
-				"isoCountry",
-				"isoRegion",
-				"municipality",
-				"scheduledService",
-				"gpsCode",
-				"iataCode",
-				"localCode",
-				"homeLink",
-				"wikipediaLink",
-				"keywords"});
-			}});
-			setFieldSetMapper(new BeanWrapperFieldSetMapper<Airport>() {{
-				setTargetType(Airport.class);
-			}});
-		}});
-		return reader;
-	}
-
-	@Bean
-	public JdbcBatchItemWriter<Airport> writer() {
-		JdbcBatchItemWriter<Airport> writer = new JdbcBatchItemWriter<Airport>();
-		writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Airport>());
-		writer.setSql("INSERT INTO AIRPORT (id,ident,type,name,latitude_deg ,longitude_deg ,elevation_ft ,continent,iso_country,iso_region,municipality,scheduled_service,gps_code,iata_code,local_code,home_link,wikipedia_link, key_words) VALUES (:id, :ident, :type, :name, :latitudeDeg, :longitudeDeg, :elevationFt, :continent, :isoCountry, :isoRegion, :municipality, :scheduledService, :gpsCode, :iataCode, :localCode, :homeLink, :wikipediaLink, :keywords)");
-		writer.setDataSource(dataSource());
-		return writer;
-	}
-	// end::readerwriterprocessor[]
-
-	// tag::jobstep[]
-	@Bean
-	public Job importUserJob(JobCompletionNotificationListener listener) {
-		return jobBuilderFactory.get("importUserJob")
-				.incrementer(new RunIdIncrementer())
-				.listener(listener)
-				.flow(step1())
-				.end()
-				.build();
-	}
 
 	@Bean
 	public Step step1() {
 		return stepBuilderFactory.get("step1")
-				.<Airport, Airport> chunk(10)
-				.reader(reader())
+				.<Airport, Airport> chunk(100)
+				.reader()
 				.processor(airportItemProcessor)
-				.writer(writer())
+				.writer()
 				.build();
 	}
 }

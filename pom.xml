@@ -6,7 +6,15 @@
 
     <groupId>groupId</groupId>
     <artifactId>TC</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>amqp-service</module>
+        <module>batch-service</module>
+        <module>context-service</module>
+        <module>tc-service</module>
+        <module>analytics-service</module>
+    </modules>
 
-    
+
 </project>
