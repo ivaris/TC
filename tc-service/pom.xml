@@ -35,16 +35,6 @@
 			<version>1.4.0.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-			<version>1.4.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>4.3.2.RELEASE</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>4.3.1.RELEASE</version>
@@ -54,12 +44,6 @@
 			<artifactId>spring-integration-core</artifactId>
 			<version>4.3.1.RELEASE</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>4.1.2.RELEASE</version>
-		</dependency>
-
 	</dependencies>
 
 </project>
